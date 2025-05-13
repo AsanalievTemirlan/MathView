@@ -1,0 +1,86 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    id("maven-publish") // Для публикации библиотеки
+}
+
+android {
+    namespace = "com.example.mathview" // Namespace для библиотеки
+    compileSdk = 35
+
+    defaultConfig {
+        minSdk = 26
+        targetSdk = 35 // Рекомендуется указать targetSdk
+
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false // Можно включить позже для оптимизации
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+    // Включение поддержки Jetpack Compose
+    buildFeatures {
+        compose = true
+    }
+
+    // Настройка версии компилятора Compose
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14" // Актуальная версия для Compose
+    }
+}
+
+dependencies {
+    // Базовые зависимости Android
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+    // Зависимости Jetpack Compose
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.ui.android)
+    implementation(libs.androidx.runtime.android) // Для предварительного просмотра
+    debugImplementation(libs.androidx.compose.ui.tooling) // Для отладки Compose
+
+    // Зависимость для WebView
+    implementation(libs.androidx.webkit)
+
+    // Тестовые зависимости
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+}
+
+// Настройка публикации библиотеки
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "io.github.AsanalievTemirlan" // Замените на ваш GitHub-ник, например, io.github.ivanpetrov
+            artifactId = "mathview"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
