@@ -55,12 +55,13 @@ dependencies {
     implementation(libs.material)
 
     // Зависимости Jetpack Compose
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.ui.android)
-    implementation(libs.androidx.runtime.android) // Для предварительного просмотра
-    debugImplementation(libs.androidx.compose.ui.tooling) // Для отладки Compose
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.ui:ui-viewinterop")
+
 
     // Зависимость для WebView
     implementation(libs.androidx.webkit)
