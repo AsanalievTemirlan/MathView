@@ -50,9 +50,8 @@ android {
 
 dependencies {
     // Базовые зависимости Android
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation("androidx.compose.material:material:1.8.1") // или нужную тебе версию
+    implementation("androidx.compose.material:material") // или нужную тебе версию
 
     // Зависимости Jetpack Compose
     implementation(libs.androidx.core.ktx)
